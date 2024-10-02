@@ -11,19 +11,22 @@
   <p id="userName">Hello, Guest!</p>
 
   <script>
-    // 取得 URL 的查詢參數
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    let lastUser = null; // 記錄上一次的 user 值
 
-    // 讀取名為 'user' 的參數值
-    const user = urlParams.get('user');
-    
-    // 將參數顯示在頁面上
-    document.addEventListener("DOMContentLoaded", () => {
-      if (user) {
-        document.getElementById("userName").textContent = `Hello, ${user}!`;
+    // 函數來讀取並顯示參數
+    function updateUser() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const user = urlParams.get('user');
+
+      if (user !== lastUser) { // 只在參數變更時更新
+        document.getElementById("userName").textContent = user ? `Hello, ${user}!` : 'Hello, Guest!';
+        lastUser = user; // 更新記錄的參數值
       }
-    });
+    }
+
+    // 每隔 1 秒檢查一次 URL 查詢參數是否改變
+    setInterval(updateUser, 1000);
   </script>
 </body>
 </html>
