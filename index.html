@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Pages 接收參數</title>
+</head>
+<body>
+  <h1>GitHub Pages 參數顯示</h1>
+
+  <p id="userName">Hello, Guest!</p>
+
+  <script>
+    // 取得 URL 的查詢參數
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    // 讀取名為 'user' 的參數值
+    const user = urlParams.get('user');
+    
+    // 將參數顯示在頁面上
+    document.addEventListener("DOMContentLoaded", () => {
+      if (user) {
+        document.getElementById("userName").textContent = `Hello, ${user}!`;
+      }
+    });
+  </script>
+</body>
+</html>
